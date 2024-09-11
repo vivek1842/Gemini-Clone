@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-// eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import "./Sidebar.css";
 import { assets } from "../../assets/assets";
@@ -42,3 +41,5 @@ export const Sidebar = () => {
     </div>
   );
 };
+
+export default Sidebar
