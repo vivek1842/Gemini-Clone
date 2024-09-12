@@ -1,9 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useContext } from 'react'
 import './Main.css'
 import { assets } from '../../assets/assets'
+import { Context } from '../../context/Context'
 
 export const Main = () => {
+
+    const {onSent, recentPrompt, showResult, loading, resultData, input, setInput} = useContext(Context)
+
   return (
     <div className='main'>
         <div className="nav">
@@ -35,11 +39,11 @@ export const Main = () => {
             </div>
             <div className="main-bottom">
                 <div className="search-box">
-                    <input type="text" placeholder='Enter a prompt here'/>
+                    <input onChange={(e) => setInput(e.target.value)} value={input} type="text" placeholder='Enter a prompt here'/>
                     <div>
                         <img src={assets.gallery_icon} alt="gallery icon not found" />
                         <img src={assets.mic_icon} alt="mic icon not found" />
-                        <img src={assets.send_icon} alt="send icon not found" />
+                        <img onClick={()=> onSent()} src={assets.send_icon} alt="send icon not found" />
                     </div>
                 </div>
                 <p className="bottom-info">
