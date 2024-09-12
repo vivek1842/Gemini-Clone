@@ -25,7 +25,7 @@ export const Main = () => {
                     <img src={assets.bulb_icon} alt="compass icon not found" />
                 </div>
                 <div className="card">
-                    <p>Suggest best story games to play on latest ps5 pro</p>
+                    <p>Suggest best story games to play on latest PS5 Pro</p>
                     <img src={assets.message_icon} alt="compass icon not found" />
                 </div>
                 <div className="card">
