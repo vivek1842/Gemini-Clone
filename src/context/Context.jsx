@@ -15,8 +15,16 @@ const ContextProvider = (props) => {
     const [resultData,setResultData] = useState("") //show actual result got from gemini
 
     const onSent = async (prompt) => {
+
+        setResultData("") //everytime our result data will be empty i.e. prev response won't be there
+        setLoading(true) //loading animation
+        setShowResult(true) 
+
         // await run(prompt)
-        await run(input)
+        const response = await run(input);
+        setResultData(response); //store response get from gemini to setResult
+        setLoading(false) //stop loading animation
+        setInput("") //input field will be reset
     }
 
     // onSent("What is react Js")
