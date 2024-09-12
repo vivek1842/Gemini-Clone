@@ -7,9 +7,16 @@
  */
 
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
-  
-  const apiKey = process.env.REACT_APP_GEMINI_API_KEY;
-  console.log("apiKey"+apiKey);
+
+// VITE API Access
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+console.log(import.meta.env.VITE_GEMINI_API_KEY);
+
+
+// React api
+//   console.log(process.env.REACT_APP_GEMINI_API_KEY);
+//   const apiKey = process.env.REACT_APP_GEMINI_API_KEY;
+//   console.log("apiKey"+apiKey);
   
   const genAI = new GoogleGenerativeAI(apiKey);
   
@@ -28,7 +35,6 @@ import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/ge
   async function run(prompt) {
     const chatSession = model.startChat({
       generationConfig,
-      safetySettings,
    // safetySettings: Adjust safety settings
    // See https://ai.google.dev/gemini-api/docs/safety-settings
       history: [
