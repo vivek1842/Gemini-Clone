@@ -20,6 +20,11 @@ const ContextProvider = (props) => {
         },75*index) //delay duration * index
     }
 
+    const newChat = () => {
+        setLoading(false);
+        setShowResult(false); //result screen hidden
+    }
+
     const onSent = async (prompt) => {
 
         setResultData("") //everytime our result data will be empty i.e. prev response won't be there
@@ -79,7 +84,8 @@ const ContextProvider = (props) => {
         loading,
         resultData,
         input,
-        setInput
+        setInput,
+        newChat
     }
 
     return(
