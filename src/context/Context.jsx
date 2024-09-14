@@ -15,7 +15,9 @@ const ContextProvider = (props) => {
     const [resultData,setResultData] = useState("") //show actual result got from gemini
 
     const delayPara = (index, nextWord) => {
-
+        setTimeout(function (){
+            setResultData(prev => prev+nextWord)
+        },75*index) //delay duration * index
     }
 
     const onSent = async (prompt) => {
@@ -25,10 +27,12 @@ const ContextProvider = (props) => {
         setShowResult(true)
         setRecentPrompt(input) 
 
+        setPrevPrompts(prev => [...prev,input]);
+
         // await run(prompt)
         const response = await run(input);
         let responseArray = response.split("**");
-        let newResponse;
+        let newResponse = ""; //if it's only declared but not initiated, in response 'undefined' word will also come with response from gemini
 
         for(let i=0; i<responseArray.length;i++) 
         {
@@ -44,7 +48,13 @@ const ContextProvider = (props) => {
 
         // setResultData(response); //store response get from gemini to setResult
         // setResultData(newResponse);
-        setResultData(newResponse2);
+        // setResultData(newResponse2);
+        let newResponseArray  = newResponse2.split(" "); //we remove space here
+        for(let i=0; i<newResponseArray.length;i++)
+        {
+            const nextWord = newResponseArray[i];
+            delayPara(i, nextWord+" "); //we added the removed space
+        }
         setLoading(false) //stop loading animation
         setInput("") //input field will be reset
     }

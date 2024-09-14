@@ -1,15 +1,23 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Sidebar.css";
 import { assets } from "../../assets/assets";
+import { Context } from "../../context/Context";
 
 export const Sidebar = () => {
   const [extented, setExtended] = useState(false);
 
+  const { onSent, prevPrompts, setPrevPrompts } = useContext(Context);
+
   return (
     <div className="sidebar">
       <div className="top">
-        <img onClick={()=> setExtended(prev => !prev)} className="menu" src={assets.menu_icon} alt="menu icon not found"/>
+        <img
+          onClick={() => setExtended((prev) => !prev)}
+          className="menu"
+          src={assets.menu_icon}
+          alt="menu icon not found"
+        />
         <div className="new-chat">
           <img src={assets.plus_icon} alt="plus icon is not found" />
           {extented ? <p>New Chat</p> : null}
@@ -17,10 +25,15 @@ export const Sidebar = () => {
         {extented ? (
           <div className="recent">
             <p className="recent-title">Recent</p>
-            <div className="recent-entry">
-              <img src={assets.message_icon} alt="message icon not found" />
-              <p>What is react....</p>
-            </div>
+            {prevPrompts.map((item, index) => {
+              return (
+                // eslint-disable-next-line react/jsx-key
+                <div className="recent-entry">
+                  <img src={assets.message_icon} alt="message icon not found" />
+                  <p>{item.slice(0,18)}....</p> {/* if we use only {item}, then when user gives long prompt it'll show all the prompt, so to make it short we use slice method */}
+                </div>
+              );
+            })}
           </div>
         ) : null}
       </div>
@@ -42,4 +55,4 @@ export const Sidebar = () => {
   );
 };
 
-export default Sidebar
+export default Sidebar;
