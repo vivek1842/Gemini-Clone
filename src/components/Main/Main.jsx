@@ -69,7 +69,11 @@ export const Main = () => {
                     <div>
                         <img src={assets.gallery_icon} alt="gallery icon not found" />
                         <img src={assets.mic_icon} alt="mic icon not found" />
-                        <img onClick={()=> onSent()} src={assets.send_icon} alt="send icon not found" />
+                        {input?
+                            <img onClick={()=> onSent()} src={assets.send_icon} alt="send icon not found" />
+                            :
+                            null
+                        }
                     </div>
                 </div>
                 <p className="bottom-info">
