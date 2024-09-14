@@ -7,7 +7,12 @@ import { Context } from "../../context/Context";
 export const Sidebar = () => {
   const [extented, setExtended] = useState(false);
 
-  const { onSent, prevPrompts, setPrevPrompts } = useContext(Context);
+  const { onSent, prevPrompts, setRecentPrompt } = useContext(Context);
+
+  const loadPrompt = async (prompt) => {
+    setRecentPrompt(prompt)
+    await onSent(prompt);
+  }
 
   return (
     <div className="sidebar">
@@ -28,7 +33,7 @@ export const Sidebar = () => {
             {prevPrompts.map((item, index) => {
               return (
                 // eslint-disable-next-line react/jsx-key
-                <div className="recent-entry">
+                <div onClick={() => loadPrompt(item)} className="recent-entry">
                   <img src={assets.message_icon} alt="message icon not found" />
                   <p>{item.slice(0,18)}....</p> {/* if we use only {item}, then when user gives long prompt it'll show all the prompt, so to make it short we use slice method */}
                 </div>

@@ -25,12 +25,20 @@ const ContextProvider = (props) => {
         setResultData("") //everytime our result data will be empty i.e. prev response won't be there
         setLoading(true) //loading animation
         setShowResult(true)
-        setRecentPrompt(input) 
 
-        setPrevPrompts(prev => [...prev,input]);
+        let response;
+        if(prompt !== undefined){ //if prompt is not undefined i.e. user want check recent prompts we will generate response using prompt
 
-        // await run(prompt)
-        const response = await run(input);
+            // await run(prompt)
+            response = await run(prompt); 
+            setRecentPrompt(prompt) 
+        } 
+        else {
+            setPrevPrompts(prev => [...prev,input]);
+            setRecentPrompt(input);
+            response = await run(input);
+        }
+
         let responseArray = response.split("**");
         let newResponse = ""; //if it's only declared but not initiated, in response 'undefined' word will also come with response from gemini
 
