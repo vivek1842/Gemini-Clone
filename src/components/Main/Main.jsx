@@ -49,7 +49,17 @@ export const Main = () => {
                     </div>
                     <div className="result-data">
                         <img src={assets.gemini_icon} alt="gemini icon not found" />
-                        <p dangerouslySetInnerHTML={{__html:resultData}}></p> {/* if provide resultdata in currly braces, it'll display all tags that available in that text */}
+                        {loading?
+                        <> 
+                            <div className="loader">
+                                <hr />
+                                <hr />
+                                <hr />
+                            </div>
+                        </>
+                        :<>
+                            <p dangerouslySetInnerHTML={{__html:resultData}}></p> {/* if provide resultdata in currly braces, it'll display all tags that available in that text */}
+                        </>}
                     </div>
                 </div>
             </>}
