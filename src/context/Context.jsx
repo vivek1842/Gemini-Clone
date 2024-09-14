@@ -18,10 +18,12 @@ const ContextProvider = (props) => {
 
         setResultData("") //everytime our result data will be empty i.e. prev response won't be there
         setLoading(true) //loading animation
-        setShowResult(true) 
+        setShowResult(true)
+        setRecentPrompt(input) 
 
         // await run(prompt)
         const response = await run(input);
+        
         setResultData(response); //store response get from gemini to setResult
         setLoading(false) //stop loading animation
         setInput("") //input field will be reset

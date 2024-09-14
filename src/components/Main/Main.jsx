@@ -15,7 +15,9 @@ export const Main = () => {
             <img src={assets.user_icon} alt="user icon not found" />
         </div>
         <div className="main-container">
-            <div className="greet">
+            {!showResult?  //if no showResult is false i.e. user not send query, show by default cards
+            <>
+                 <div className="greet">
                 <p><span>Hello, Vivek</span></p>
                 <p>How can I help you today?</p>
             </div>
@@ -37,6 +39,20 @@ export const Main = () => {
                     <img src={assets.code_icon} alt="compass icon not found" />
                 </div>
             </div>
+            </> 
+            : 
+            <>
+                <div className="result">
+                    <div className="result-title">
+                        <img src={assets.user_icon} alt="user icon not found" />
+                        <p>{recentPrompt}</p>
+                    </div>
+                    <div className="result-data">
+                        <img src={assets.gemini_icon} alt="gemini icon not found" />
+                        <p dangerouslySetInnerHTML={{__html:resultData}}></p> {/* if provide resultdata in currly braces, it'll display all tags that available in that text */}
+                    </div>
+                </div>
+            </>}
             <div className="main-bottom">
                 <div className="search-box">
                     <input onChange={(e) => setInput(e.target.value)} value={input} type="text" placeholder='Enter a prompt here'/>

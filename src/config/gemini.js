@@ -43,6 +43,7 @@ console.log(import.meta.env.VITE_GEMINI_API_KEY);
   
     const result = await chatSession.sendMessage(prompt);
     console.log(result.response.text());
+    
     return result.response.text();
   }
   
